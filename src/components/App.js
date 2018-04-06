@@ -15,7 +15,7 @@ class MagmaBeersApp extends React.Component {
     return (
       <Router>
         <MainContainer>
-          <Route exact={true} path="/" component={BeerLogIndex}/>
+          <Route exact path="/" component={BeerLogIndex}/>
           <Route path="/beer-logs" component={BeerLogIndex}/>
         </MainContainer>
       </Router>
