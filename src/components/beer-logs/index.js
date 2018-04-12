@@ -1,9 +1,10 @@
 import React from 'react';
+import List from '../widgets/list'
 
 class BeerLogIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { beers: null };
+    this.state = { beers: [] };
   }
 
   componentDidMount() {
@@ -32,7 +33,8 @@ class BeerLogIndex extends React.Component {
     const { beers } = this.state;
     return (
       <div>
-        {beers ? JSON.stringify(beers) : 'Loading...'}
+        {/* {beers ? JSON.stringify(beers) : 'Loading...'} */}
+        <List items={beers} />
       </div>
       // <table>
       //   <thead>
