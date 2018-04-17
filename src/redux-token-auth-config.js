@@ -2,14 +2,16 @@ import { generateAuthActions } from 'redux-token-auth'
 import { authUrl } from './constants'
 
 const config = {
-    authUrl,
-    userAttributes: {
-          firstName: 'first_name',
-          imageUrl: 'image',
-        },
-    userRegistrationAttributes: {
-          firstName: 'first_name',
-        },
+  authUrl,
+  userAttributes: {
+    uid: 'uid',
+    accessToken: 'access-token',
+    client: 'client',
+    imageUrl: 'image',
+  },
+  userRegistrationAttributes: {
+    firstName: 'first_name',
+  },
 }
 
 const {

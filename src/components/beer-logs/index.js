@@ -1,36 +1,22 @@
-import React from 'react';
+import React from 'react'
 import List from '../widgets/list'
+import { connect } from 'react-redux'
+import { getBeers } from '../../actions/beers';
+// TODO: getBeers
+
+import axios from 'axios';
 
 class BeerLogIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { beers: [] };
   }
 
   componentDidMount() {
-    let header = new Headers({
-      'Access-Control-Allow-Origin':'*',
-      'Content-Type': 'multipart/form-data'
-    });
-    let sentData = {
-      method: 'GET',
-      mode: 'cors',
-      header: header
-    };
-    fetch('http://localhost:3000/api/v1/beers', sentData)
-      .then(res => res.json())
-      .then(beers => {
-        console.log('beers => ', beers)
-        this.setState({ beers });
-      })
-      .catch(e => {
-        console.log('catch fetch')
-        console.log(e)
-      });
+    this.props.getBeers();
   }
 
   render() {
-    const { beers } = this.state;
+    const { beers } = this.props;
     return (
       <div>
         {/* {beers ? JSON.stringify(beers) : 'Loading...'} */}
@@ -49,4 +35,17 @@ class BeerLogIndex extends React.Component {
   }
 }
 
-export default BeerLogIndex;
+const mapStateToProps = (state) => {
+  return {}
+}
+
+const mapDispatchToProps  = (dispatch) => {
+  return {
+    getBeers: () => dispatch(getBeers())
+  }
+}
+
+BeerLogIndex.defaultProps = {
+  beers: []
+}
+export default connect(mapStateToProps, mapDispatchToProps)(BeerLogIndex);

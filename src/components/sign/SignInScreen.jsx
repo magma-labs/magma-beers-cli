@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { signInUser } from '../redux-token-auth-config' // <-- note this is YOUR file, not the redux-token-auth NPM module
-import {Button, Icon, Row, Input} from 'react-materialize'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import { signInUser } from '../../redux-token-auth-config'; // <-- note this is YOUR file, not the redux-token-auth NPM module
+import { Button, Icon, Row, Input } from 'react-materialize';
 
 class SignInScreen extends Component {
   constructor (props) {
@@ -9,7 +10,8 @@ class SignInScreen extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLogged: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,17 +38,23 @@ class SignInScreen extends Component {
     console.log(this.props)
     console.log(password)
     signInUser({ email, password }) // <-<-<-<-<- here's the important part <-<-<-<-<-
-      .then((response) => {
-        alert(response)
+      .then(response => {
+        debugger;
+        console.log(response);
+        this.setState({
+          isLogged: true
+        })
       })
       .catch((error) => {
+        debugger;
         alert(error)
       })
   }
 
   render () {
     const { handleSubmit } = this
-    return (
+    const isLogged = this.state.isLogged;
+    return isLogged ? (<Redirect to='/beer-logs' />) : (
       <div>
         <form onSubmit={handleSubmit}>
           <Row>
@@ -64,5 +72,5 @@ class SignInScreen extends Component {
 
 export default connect(
     null,
-    { signInUser },
+    { signInUser }
 )(SignInScreen)

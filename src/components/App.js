@@ -5,7 +5,7 @@ import BeerLogIndex from './beer-logs/index.js';
 import { createBrowserHistory } from 'history'
 import HomePage from './HomePage'
 // import SomeProtectedPageComponent from './SomeProtectedPageComponent'
-import SignInScreen from './SignInScreen'
+import SignInScreen from './sign/SignInScreen'
 import { generateRequireSignInWrapper } from 'redux-token-auth'
 
 const requireSignIn = generateRequireSignInWrapper({
@@ -28,10 +28,8 @@ class MagmaBeersApp extends React.Component {
       <Router history={history}>
         <MainContainer>
           {/* <Route exact path="/" component={BeerLogIndex}/> */}
-          {/* <Route path="/beer-logs" component={BeerLogIndex}/> */}
-
-          <Route exact={true} path="/" component={HomePage} />
-          <Route path="/protected" component={requireSignIn(BeerLogIndex)} />
+          <Route path="/beer-logs" component={BeerLogIndex}/>
+          <Route exact path="/" component={requireSignIn(BeerLogIndex)} />
           <Route path="/signin" component={SignInScreen} />
         </MainContainer>
       </Router>
