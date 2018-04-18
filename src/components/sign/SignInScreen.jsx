@@ -39,14 +39,11 @@ class SignInScreen extends Component {
     console.log(password)
     signInUser({ email, password }) // <-<-<-<-<- here's the important part <-<-<-<-<-
       .then(response => {
-        debugger;
-        console.log(response);
         this.setState({
           isLogged: true
         })
       })
       .catch((error) => {
-        debugger;
         alert(error)
       })
   }

@@ -4,14 +4,17 @@ import { connect } from 'react-redux'
 import { getBeers } from '../../actions/beers';
 // TODO: getBeers
 
-import axios from 'axios';
-
 class BeerLogIndex extends React.Component {
   constructor(props) {
     super(props);
+    this.loadBeers = this.loadBeers.bind(this);
   }
 
   componentDidMount() {
+    // this.props.getBeers();
+  }
+
+  loadBeers() {
     this.props.getBeers();
   }
 
@@ -19,24 +22,17 @@ class BeerLogIndex extends React.Component {
     const { beers } = this.props;
     return (
       <div>
-        {/* {beers ? JSON.stringify(beers) : 'Loading...'} */}
         <List items={beers} />
+        <button onClick={ this.loadBeers } >LoadBeers </button>
       </div>
-      // <table>
-      //   <thead>
-      //     <tr>
-      //       <th>Beer</th>
-      //       <th>Date</th>
-      //       <th>Quantity</th>
-      //     </tr>
-      //   </thead>
-      // </table>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    beers: state.beersReducer.beers
+  }
 }
 
 const mapDispatchToProps  = (dispatch) => {
